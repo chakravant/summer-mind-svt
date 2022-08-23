@@ -1,8 +1,6 @@
 <script lang="ts">
-    import type { ITrial, trials } from "src/store/store";
-import { listen } from "svelte/internal";
-import CipherRes from "./CipherRes.svelte";
-import Codeinput from "./Codeinput.svelte";
+    import type { ITrial } from "src/store/store";
+    import CipherRes from "./CipherRes.svelte";
     import CodeRes from "./CodeRes.svelte";
     export let solutions: ITrial[];
 </script>

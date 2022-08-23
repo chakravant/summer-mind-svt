@@ -1,8 +1,8 @@
 <script lang="ts">
     import {trials, settings, secret, state, screen} from "../store/store";
     import {makeMove} from '../store/game';
-    import Codeinput from "./Codeinput.svelte";
-    import type { CodeEvent } from "./Codeinput.svelte";
+    import CodeInput from "./CodeInput.svelte";
+    import type { CodeEvent } from "./CodeInput.svelte";
     import Results from "./Results.svelte";
     
     function postCode({detail} : {detail: CodeEvent}) {
@@ -19,7 +19,7 @@
 <h1>MASTERMIND</h1>
 {#if $state === 'RUNNING'}
 <h2>Try your skill</h2>
-<Codeinput on:newCode={postCode} maxCode={$settings.max} minCode={$settings.min}/>
+<CodeInput on:newCode={postCode} maxCode={$settings.max} minCode={$settings.min}/>
 {:else}
 <button on:click={resetGame}>AGAIN</button>
 {/if}
