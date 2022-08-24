@@ -4,15 +4,15 @@ import { calcBg, calcFg } from "../utils/colors";
 </script>
 
 {#each numCodes as code}
-<div class='bt' style="--bg-color: {calcBg(code)}; --tx-color: {calcFg(code)}">{code}</div>
+<div class='bt' style="--bg-color: {calcBg(code)}; --tx-color: {calcFg(code)}"></div>
 {/each}
 
 <style>
     div.bt {
         display: inline-block;
         text-align: center;
-        width: 20px;
-        height: 20px;
+        width: 30px;
+        height: 30px;
         border: black thin solid;
         border-radius: 15px;
         margin-left: 5px;

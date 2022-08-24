@@ -10,8 +10,10 @@ import { calcBg, calcFg } from "../utils/colors";
     
     const dispatch = createEventDispatcher();
     function addKey(key: number) {
-        code.push(key);
-        code = code;
+        if (code.length < 4) {
+            code.push(key);
+            code = code;
+        }
     }
 
     function removeKey() {
@@ -25,13 +27,14 @@ import { calcBg, calcFg } from "../utils/colors";
     }
 </script>
 
-<div class="sc">
+<div class="container">
+<div class="sc" class:disabled={code.length >=4}>
     {#each keys as key (key)}
     <div 
-        class='bt' 
+        class='bt click' 
         style="--bg-color: {calcBg(key)}; --tx-color: {calcFg(key)}"
         on:click={_ => addKey(key)}
-    >{key}</div>
+    ></div>
     {/each}
 </div>
 <div class="sc">
@@ -39,10 +42,11 @@ import { calcBg, calcFg } from "../utils/colors";
     <div 
         class='bt' 
         style="--bg-color: {calcBg(key)}; --tx-color: {calcFg(key)}"
-    >{key}</div>
+    ></div>
     {/each}
-    <button on:click={removeKey} disabled={code.length === 0}>&lt;=</button>
-    <button on:click={postCode} disabled={code.length !== 4}>Go!</button>
+    <button on:click={removeKey} disabled={code.length === 0} class="ltbutton">&lt;</button>
+    <button on:click={postCode} disabled={code.length !== 4} class="gobutton">Go!</button>
+</div>
 </div>
 
 <script lang="ts" context="module">
@@ -53,18 +57,80 @@ import { calcBg, calcFg } from "../utils/colors";
 
 
 <style>
+    div.container {
+        display: inline-block;
+    }
+
+    div.click {
+        cursor: crosshair;
+    }
+
     div.bt {
         display: inline-block;
         text-align: center;
-        width: 20px;
-        height: 20px;
+        width: 30px;
+        height: 30px;
         border: black thin solid;
         border-radius: 15px;
         margin-left: 5px;
         background-color: var(--bg-color);
         color: var(--tx-color);
+        margin-right: 8px;
     }
+
+    div.sc.disabled div.bt {
+        background-color: gray !important;
+        cursor: pointer !important;
+    }
+
     div.sc {
         margin-top: 10px;
+    }
+
+    div.sc button.ltbutton {
+        display: inline-block;
+        text-align: center;
+        width: 30px;
+        height: 30px;
+        border: black thin solid;
+        border-radius: 15px;
+        margin-left: 5px;
+        background-color: black;
+        color: white;
+        font-weight: bold;
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: large;
+    }
+    div.sc button.ltbutton:disabled {
+        display: inline-block;
+        text-align: center;
+        width: 30px;
+        height: 30px;
+        border: black thin solid;
+        border-radius: 15px;
+        margin-left: 5px;
+        background-color: white;
+        color: gray;
+        font-weight: bold;
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: large;
+    }
+
+    div.sc button.gobutton {
+        display: block;
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: x-large;
+        margin: 15px 5px 5px;
+        padding-top: 8px;
+        padding-bottom: 8px;
+        background-color: navy;
+        color: white;
+        width: 98%;
+    }
+
+    div.sc button.gobutton:disabled {
+        color: white;
+        border: none;
+        background-color: white;
     }
 </style>

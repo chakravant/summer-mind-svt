@@ -6,14 +6,14 @@
 </script>
 
 {#each keys as key}
-<div class='bt' style="--bg-color: {Color}">&nbsp;</div>
+<div class='bt' style="--bg-color: {Color}"></div>
 {/each}
 
 <style>
     div.bt {
         display: inline-block;
-        width: 20px;
-        height: 20px;
+        width: 30px;
+        height: 30px;
         border: black thin solid;
         border-radius: 15px;
         margin-left: 5px;

@@ -25,10 +25,11 @@ export const screen = writable<Screen>('SETUP');
 
 export const state: Readable<State> = derived([trials, settings], stores => {
     const [list, settings] = stores;
-    if (list.length >= settings.tries) {
-        return 'FAILED';
-    } else if (list.length > 0 && list.at(-1).black === 4) {
+    const win = list.length > 0 && list.at(-1).black === 4;
+    if (win) {
         return 'SUCCEED';
+    } else if (list.length >= settings.tries) {
+        return 'FAILED';
     } else {
         return 'RUNNING';
     }
